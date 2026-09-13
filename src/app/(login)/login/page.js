@@ -9,7 +9,7 @@ import app from "@/app/config/app";
 import { login } from "@/services/auth";
 
 const fieldClass =
-"w-full rounded-lg border px-3 py-2 outline-none transition focus:ring-2 focus:ring-blue-500";
+"w-full rounded-lg border px-3 py-2 pr-10 outline-none transition focus:ring-2 focus:ring-blue-500";
 
 const buttonClass =
 "flex w-full items-center justify-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50";
@@ -19,6 +19,8 @@ const router = useRouter();
 
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
+
+const [showPassword, setShowPassword] = useState(false);
 
 const [loading, setLoading] = useState(false);
 const [error, setError] = useState("");
@@ -84,13 +86,86 @@ return ( <main className="flex min-h-screen items-center justify-center bg-gray-
           </Link>
         </div>
 
-        <input
-          type="password"
-          required
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          className={fieldClass}
-        />
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            required
+            value={password}
+            onChange={(event) =>
+              setPassword(event.target.value)
+            }
+            className={fieldClass}
+          />
+
+          <button
+type="button"
+onClick={() =>
+setShowPassword((current) => !current)
+}
+className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 transition hover:text-gray-700"
+aria-label={
+showPassword
+? "Hide password"
+: "Show password"
+}
+
+>
+
+{showPassword ? ( <svg
+   xmlns="http://www.w3.org/2000/svg"
+   width="20"
+   height="20"
+   fill="none"
+   viewBox="0 0 24 24"
+   stroke="currentColor"
+   strokeWidth="2"
+ > <path
+     strokeLinecap="round"
+     strokeLinejoin="round"
+     d="M3 3l18 18"
+   />
+
+
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="M10.584 10.587a2 2 0 002.829 2.829"
+  />
+
+  <path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    d="M9.88 4.24A10.94 10.94 0 0112 4c5.5 0 9.5 5.5 9.5 5.5s-1.39 2.09-3.84 3.72M6.23 6.23C3.8 7.8 2.5 9.5 2.5 9.5"
+  />
+</svg>
+
+
+) : ( <svg
+   xmlns="http://www.w3.org/2000/svg"
+   width="20"
+   height="20"
+   fill="none"
+   viewBox="0 0 24 24"
+   stroke="currentColor"
+   strokeWidth="2"
+ > <path
+     strokeLinecap="round"
+     strokeLinejoin="round"
+     d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"
+   />
+
+
+  <circle
+    cx="12"
+    cy="12"
+    r="2.5"
+  />
+</svg>
+
+
+)} </button>
+
+        </div>
       </div>
 
       {error && (
