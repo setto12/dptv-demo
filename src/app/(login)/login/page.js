@@ -71,9 +71,18 @@ return ( <main className="flex min-h-screen items-center justify-center bg-gray-
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-medium">
-          Password
-        </label>
+        <div className="mb-2 flex items-center justify-between">
+          <label className="text-sm font-medium">
+            Password
+          </label>
+
+          <Link
+            href="/forgot-password"
+            className="text-sm text-blue-600 transition hover:text-blue-700"
+          >
+            Forgot Password?
+          </Link>
+        </div>
 
         <input
           type="password"
