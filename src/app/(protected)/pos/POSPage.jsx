@@ -354,27 +354,31 @@ export default function POSPage() {
   return (
     <div className="space-y-6">
       {/* Daily Payment Summary */}
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-        <div className="rounded-xl border bg-white p-3">
-          <p className="text-sm text-gray-500">Cash</p>
+      <div className="grid grid-cols-3 gap-2 sm:gap-3">
+        <div className="min-w-0 rounded-lg border bg-white px-2 py-2.5 sm:rounded-xl sm:p-3">
+          <p className="truncate text-[11px] text-gray-500 sm:text-sm">Cash</p>
 
-          <p className="mt-1 text-xl font-semibold">
+          <p className="mt-0.5 truncate text-sm font-semibold sm:mt-1 sm:text-xl">
             ₱{paymentSummary.cash.toFixed(2)}
           </p>
         </div>
 
-        <div className="rounded-xl border bg-white p-3">
-          <p className="text-sm text-gray-500">E-Wallet</p>
+        <div className="min-w-0 rounded-lg border bg-white px-2 py-2.5 sm:rounded-xl sm:p-3">
+          <p className="truncate text-[11px] text-gray-500 sm:text-sm">
+            E-Wallet
+          </p>
 
-          <p className="mt-1 text-xl font-semibold">
+          <p className="mt-0.5 truncate text-sm font-semibold sm:mt-1 sm:text-xl">
             ₱{paymentSummary.eWallet.toFixed(2)}
           </p>
         </div>
 
-        <div className="rounded-xl border bg-white p-3">
-          <p className="text-sm text-gray-500">Online Banking</p>
+        <div className="min-w-0 rounded-lg border bg-white px-2 py-2.5 sm:rounded-xl sm:p-3">
+          <p className="truncate text-[11px] text-gray-500 sm:text-sm">
+            Online Banking
+          </p>
 
-          <p className="mt-1 text-xl font-semibold">
+          <p className="mt-0.5 truncate text-sm font-semibold sm:mt-1 sm:text-xl">
             ₱{paymentSummary.onlineBanking.toFixed(2)}
           </p>
         </div>
