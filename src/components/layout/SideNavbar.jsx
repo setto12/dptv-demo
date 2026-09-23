@@ -3,8 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+
 import { useLayout } from "@/context/LayoutContext";
 import { useAuth } from "@/context/AuthContext";
+import { useBranding } from "@/context/BrandingContext";
 
 export default function SideNavbar({
   links = [],
@@ -29,6 +31,7 @@ export default function SideNavbar({
   const { can } = useAuth();
   const pathname = usePathname();
   const { sidebarMode } = useLayout();
+  const { branding } = useBranding();
 
   const collapsed = sidebarMode === "collapsed";
 
@@ -43,21 +46,28 @@ export default function SideNavbar({
   return (
     <aside
       className={`
-      sticky
-      top-20
-      h-[calc(100vh-5rem)]
-      flex
-      flex-col
-      transition-all
-      duration-300
-      ${
-        collapsed ? layout.sidebar.collapsedWidth : layout.sidebar.expandedWidth
-      }
-    `}
+        sticky
+        top-20
+        h-[calc(100vh-5rem)]
+        flex
+        flex-col
+        transition-all
+        duration-300
+        ${
+          collapsed
+            ? layout.sidebar.collapsedWidth
+            : layout.sidebar.expandedWidth
+        }
+      `}
       style={{
-        "--sidebar-bg": theme.background,
-        "--sidebar-text": theme.text,
-        "--sidebar-hover": theme.hover,
+        "--sidebar-bg":
+          branding.sidebar_color || theme?.background || "#ffffff",
+
+        "--sidebar-text":
+          branding.text_color || theme?.text || "#111827",
+
+        "--sidebar-hover":
+          branding.primary_color || theme?.hover || "#2563eb",
 
         backgroundColor: "var(--sidebar-bg)",
         color: "var(--sidebar-text)",
@@ -73,7 +83,11 @@ export default function SideNavbar({
           className={`
             mx-auto
             space-y-3
-            ${collapsed ? "w-full px-2" : layout.sidebar.navigation.width}
+            ${
+              collapsed
+                ? "w-full px-2"
+                : layout.sidebar.navigation.width
+            }
           `}
         >
           {visibleLinks.map((link) => {
@@ -94,7 +108,11 @@ export default function SideNavbar({
                     duration-300
                     text-[color:var(--sidebar-text)]
                     ${collapsed ? "justify-center px-2" : "px-4"}
-                    ${isActive ? "bg-[var(--sidebar-hover)]" : "hover:bg-[var(--sidebar-hover)]"}
+                    ${
+                      isActive
+                        ? "bg-[var(--sidebar-hover)]"
+                        : "hover:bg-[var(--sidebar-hover)]"
+                    }
                     select-none
                     cursor-pointer
                   `}
@@ -106,18 +124,31 @@ export default function SideNavbar({
                       justify-center
                       transition-all
                       duration-300
-                      ${collapsed ? "w-full" : layout.sidebar.navigation.iconContainerWidth}
+                      ${
+                        collapsed
+                          ? "w-full"
+                          : layout.sidebar.navigation
+                              .iconContainerWidth
+                      }
                     `}
                     style={{
-                      width: layout.sidebar.navigation.iconContainerWidth,
+                      width:
+                        layout.sidebar.navigation
+                          .iconContainerWidth,
                     }}
                   >
                     {link.icon && (
                       <Image
                         src={link.icon}
                         alt={link.label}
-                        width={layout.sidebar.navigation.iconSize}
-                        height={layout.sidebar.navigation.iconSize}
+                        width={
+                          layout.sidebar.navigation
+                            .iconSize
+                        }
+                        height={
+                          layout.sidebar.navigation
+                            .iconSize
+                        }
                       />
                     )}
                   </div>
@@ -130,7 +161,11 @@ export default function SideNavbar({
                       duration-300
                       ${layout.sidebar.navigation.fontSize}
                       ${layout.sidebar.navigation.fontWeight}
-                      ${collapsed ? "ml-0 w-0 opacity-0" : "ml-5 w-auto opacity-100"}
+                      ${
+                        collapsed
+                          ? "ml-0 w-0 opacity-0"
+                          : "ml-5 w-auto opacity-100"
+                      }
                     `}
                   >
                     {link.label}

@@ -5,12 +5,14 @@ export default function Logo({
   href = "/",
   src,
   alt = "Company Logo",
+  title = "Business Management",
   imageWidth = 180,
   imageHeight = 50,
 }) {
   return (
     <Link
       href={href}
+      title={title}
       className="
         inline-flex
         items-center
@@ -20,7 +22,7 @@ export default function Logo({
         transition-colors
       "
     >
-      {src && (
+      {src ? (
         <Image
           src={src}
           alt={alt}
@@ -28,6 +30,10 @@ export default function Logo({
           height={imageHeight}
           priority
         />
+      ) : (
+        <span className="text-lg font-semibold">
+          {title}
+        </span>
       )}
     </Link>
   );

@@ -1,6 +1,7 @@
 import "./globals.css";
 
 import { LayoutProvider } from "@/context/LayoutContext";
+import { BrandingProvider } from "@/context/BrandingContext";
 import { Toaster } from "sonner";
 
 export const metadata = {
@@ -12,15 +13,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <LayoutProvider>
-          {children}
+        <BrandingProvider>
+          <LayoutProvider>
+            {children}
 
-          <Toaster
-            position="bottom-right"
-            richColors
-            closeButton
-          />
-        </LayoutProvider>
+            <Toaster
+              position="bottom-right"
+              richColors
+              closeButton
+            />
+          </LayoutProvider>
+        </BrandingProvider>
       </body>
     </html>
   );

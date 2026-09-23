@@ -10,10 +10,6 @@ export default function SignupPage() {
                     <h1 className="text-2xl font-bold">
                         Create Account
                     </h1>
-
-                    <p className="mt-2 text-sm text-gray-500">
-                        Create your DiskartePinoyTV account
-                    </p>
                 </div>
 
                 <SignupForm />

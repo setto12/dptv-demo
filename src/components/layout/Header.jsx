@@ -6,6 +6,7 @@ import ProfileMenu from "./header/ProfileMenu";
 
 import app from "@/app/config/app";
 import { useLayout } from "@/context/LayoutContext";
+import { useBranding } from "@/context/BrandingContext";
 
 export default function Header({
   profile = {
@@ -15,9 +16,16 @@ export default function Header({
   },
 }) {
   const { toggleSidebar } = useLayout();
+  const { branding } = useBranding();
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-white">
+    <header
+      className="sticky top-0 z-50 border-b"
+      style={{
+        backgroundColor: "var(--color-header)",
+        borderColor: "var(--color-border)",
+      }}
+    >
       <div className="flex h-20 items-center px-6">
         {/* Left */}
 
@@ -26,9 +34,9 @@ export default function Header({
 
           <Logo
             href={app.home}
-            src={app.logo.src}
-            alt={app.logo.alt}
-            title={app.name}
+            src={branding.logo_url}
+            alt={branding.app_name}
+            title={branding.app_name}
             imageWidth={app.logo.width}
             imageHeight={app.logo.height}
           />
